@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,13 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <title>Document</title>
 </head>
-<body>
 
+<body>
     <x-navbar />
+    <x-message />
+    <h1 class="fw-bold text-center my-4">{{$title}}</h1>
+
+    <div>{{$main}}</div>
 </body>
+
 </html>
