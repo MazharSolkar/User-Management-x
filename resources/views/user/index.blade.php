@@ -9,7 +9,7 @@
                     </div>
                     <!-- Search Form -->
                     <div class="mb-3">
-                        <form action="{{ route('dashboard.index') }}" method="GET">
+                        <form action="{{ route('user.index') }}" method="GET">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="search" value="{{ request('search') }}"
                                     placeholder="Search by name or email">
