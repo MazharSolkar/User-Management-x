@@ -19,6 +19,8 @@
                             <div class="text-center">
                                 <p><strong>Name: </strong>{{ $user->name }}</p>
                                 <p><strong>Email: </strong>{{ $user->email }}</p>
+                                <p><strong>Role: </strong>{{ $user->role }}</p>
+                                <p><strong>Registration Date: </strong>{{ $user->created_at->format('d M,Y')}}</p>
                             </div>
 
                             <!-- Edit, Logout & Update Buttons -->
