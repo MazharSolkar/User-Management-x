@@ -10,7 +10,7 @@
                         <div class="card-body">
                             <!-- Profile Image -->
                             <div class="d-flex justify-content-center mb-3">
-                                <img src="{{ Auth::check() && $user->image ? asset('storage/' . $user->image) : asset('Default_pfp.jpg')}}"
+                                <img src="{{ $user->image ? asset('storage/' . $user->image) : asset('Default_pfp.jpg')}}"
                                     class="rounded-circle" width="150" height="150" alt="Profile Image">
                             </div>
                             <form method="POST" action="{{ route('user.profile.update',$user->id) }}"

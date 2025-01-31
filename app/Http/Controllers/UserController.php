@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return view('user.index');
+        $users = User::get();
+        return view('user.index', compact('users'));
     }
 
     public function register(Request $request)
@@ -36,6 +38,12 @@ class UserController extends Controller
         return view('user.edit', compact('user'));
     }
 
+    public function editPassword($id)
+    {
+        $user = User::findOrFail($id);
+        return view('user.edit-password', compact('user'));
+    }
+
     public function logout()
     {
         Auth::logout();
@@ -49,7 +57,7 @@ class UserController extends Controller
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|min:5|max:50|confirmed',
             'password_confirmation' => 'required',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $image_path = null;
@@ -89,24 +97,44 @@ class UserController extends Controller
 
         $fields = $request->validate([
             'name' => 'nullable|max:50|min:4',
-            'email' => 'nullable|email|max:255|unique:users,email,'.$user->id,
+            'email' => 'nullable|email|max:255|unique:users,email,' . $user->id,
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $image_path = $user->image;
-        if($request->hasFile('image')) {
-            if($image_path != null) {
+        if ($request->hasFile('image')) {
+            if ($image_path != null) {
                 Storage::disk('public')->delete($user->image);
             }
-            $image_path = Storage::disk('public')->put('images',$request->image);
+            $image_path = Storage::disk('public')->put('images', $request->image);
         }
 
         $user->update([
-            'name'=> $request->name ?? $user->name,
-            'email'=> $request->email ?? $user->email,
-            'image'=> $image_path
+            'name' => $request->name ?? $user->name,
+            'email' => $request->email ?? $user->email,
+            'image' => $image_path
         ]);
 
-        return redirect()->route('user.show',$user->id)->with('success','User profile updated successfully!');
+        return redirect()->route('user.show', $user->id)->with('success', 'User profile updated successfully!');
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $fields = $request->validate([
+            'password' => 'required|max:50',
+            'new_password' => 'required|min:5|max:50|confirmed',
+            'new_password_confirmation' => 'required',
+        ]);
+
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()->with('error', 'The current password is incorrect!');
+        }
+
+        $user->update([
+            'password' => bcrypt($request->new_password),
+        ]);
+
+        return redirect()->route('user.show', $user->id)->with('success', 'Password updated successfully!');
     }
 }

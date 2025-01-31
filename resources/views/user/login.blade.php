@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <form method="POST" action="{{route('user.login.process')}}">
                                 @csrf
-                                <x-form.input type="email" name="email" label="email" placeholder="test@gmail.com" />
+                                <x-form.input type="email" name="email" label="email" placeholder="test@gmail.com" value="{{old('email')}}" />
                                 <x-form.input type="password" name="password" label="password" placeholder="********" />
 
                                 <div class="form-group mb-3">
