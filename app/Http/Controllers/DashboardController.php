@@ -8,8 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index() {
-        $users = User::get();
+    public function index(Request $request) {
+        $search = $request->search;
+
+        $users = User::when($search, function($query) use ($search) {
+            return $query->where('name','like',"%{$search}%")
+            ->orWhere('email','like',"%{$search}%");
+        })->paginate(10);
+
         return view('dashboard.index',compact('users'));
     }
 

@@ -10,9 +10,15 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::get();
+        $search = $request->search;
+
+        $users = User::when($search, function ($query) use ($search) {
+            return $query->where('name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%");
+        })->paginate(10);
+
         return view('user.index', compact('users'));
     }
 
@@ -57,7 +63,7 @@ class UserController extends Controller
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|min:5|max:50|confirmed',
             'password_confirmation' => 'required',
-            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $image_path = null;
