@@ -7,60 +7,84 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# User Management System
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Description
+This is a simple User Management System built using Laravel. It includes essential authentication and user management features such as registration, login, profile management, password reset, and an admin panel for managing users.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Setup
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Prerequisite
+Ensure you have the following installed on your machine:
+- PHP (>= 8.0)
+- Composer
+- Laravel
+- MySQL
 
-## Learning Laravel
+### Steps
+1. Clone the repository:
+   ```bash
+   https://github.com/MazharSolkar/User-Management-x.git
+   cd User-Management-x
+   ```
+2. Install dependencies:
+   ```bash
+   composer install
+   npm install
+   ```
+3. Setup `.env` file using the `.env.example`
+4. Generate application key:
+   ```bash
+   php artisan key:generate
+   ```
+5. Run migrations and seed database:
+   ```bash
+   php artisan migrate
+   php artisan db:seed
+   ```
+6. Serve the application:
+   ```bash
+   php artisan serve
+   ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Features
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 1. User Authentication
+- Users can register, login, logout, update password.
+- Implemented session based authentication
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Password Reset
+- Users can request forgot password link in case they forgot their password.
 
-## Laravel Sponsors
+### 3. User Profile
+- Users can update their profile.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 4. Admin Panel
+- Only accessible to users with role admin.
+- Admin can view, manage user accounts (CRUD Operations).
 
-### Premium Partners
+## Additional Features
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 1. Search
+- You can search users using their name or email.
 
-## Contributing
+### 2. Pagination
+- User lists and admin dashboard tables support pagination.
+- Implemented using Laravel's built-in pagination method (`paginate()`).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Design Decisions
+- **Modular Structure**: The application follows an MVC architecture to maintain clean separation of concerns.
+- **Blade Templating**: Laravel Blade is used for templating to ensure a dynamic and reusable UI.
+- **Eloquent ORM**: Laravel’s Eloquent ORM is used for database operations to simplify queries and relationships.
+- **Role-Based Access Control**: Only admins can manage users, ensuring restricted access to sensitive operations.
+- **Search and Pagination**: Implemented to improve user experience when browsing and managing a large number of users.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License.
+
+## Author
+
+Developed by Mazhar Solkar.
+---
+Feel free to update the repository link and modify the content based on any additional features or configurations you've added!
