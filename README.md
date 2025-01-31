@@ -11,6 +11,7 @@ This is a simple User Management System built using Laravel. It includes essenti
 Ensure you have the following installed on your machine:
 - PHP (>= 8.0)
 - Composer
+- Node jS
 - Laravel
 - MySQL
 
