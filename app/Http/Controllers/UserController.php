@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -41,12 +42,16 @@ class UserController extends Controller
     public function edit(Request $request, string $id)
     {
         $user = User::findOrFail($id);
+        Gate::authorize('isOwnerOrAdmin', $user);
+
         return view('user.edit', compact('user'));
     }
 
     public function editPassword($id)
     {
         $user = User::findOrFail($id);
+        Gate::authorize('isOwnerOrAdmin', $user);
+
         return view('user.edit-password', compact('user'));
     }
 
@@ -100,6 +105,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
+        Gate::authorize('isOwnerOrAdmin', $user);
 
         $fields = $request->validate([
             'name' => 'nullable|max:50|min:4',
@@ -127,6 +133,8 @@ class UserController extends Controller
     public function updatePassword(Request $request, $id)
     {
         $user = User::findOrFail($id);
+        Gate::authorize('isOwnerOrAdmin', $user);
+
         $fields = $request->validate([
             'password' => 'required|max:50',
             'new_password' => 'required|min:5|max:50|confirmed',
