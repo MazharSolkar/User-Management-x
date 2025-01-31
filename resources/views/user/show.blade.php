@@ -30,9 +30,6 @@
                                         @csrf
                                         <button type="submit" class="btn btn-danger">Logout</button>
                                     </form>
-                                    <button type="button" class="btn btn-warning text-white"
-                                        onclick="window.location.href='{{ route('user.edit.password', $user->id) }}'">Update
-                                        Password</button>
                                 </div>
                             @endif
                         </div>

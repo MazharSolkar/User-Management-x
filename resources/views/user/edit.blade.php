@@ -8,12 +8,19 @@
                             <h3>Edit Profile</h3>
                         </div>
                         <div class="card-body">
+                            {{-- Update Password --}}
+                            <div class="d-flex justify-content-center mb-2">
+                                <a href="{{ route('user.edit.password', $user->id) }}"
+                                    class="text-center btn btn-warning text-white">
+                                    Update Password
+                                </a>
+                            </div>
                             <!-- Profile Image -->
                             <div class="d-flex justify-content-center mb-3">
-                                <img src="{{ $user->image ? asset('storage/' . $user->image) : asset('Default_pfp.jpg')}}"
+                                <img src="{{ $user->image ? asset('storage/' . $user->image) : asset('Default_pfp.jpg') }}"
                                     class="rounded-circle" width="150" height="150" alt="Profile Image">
                             </div>
-                            <form method="POST" action="{{ route('user.profile.update',$user->id) }}"
+                            <form method="POST" action="{{ route('user.profile.update', $user->id) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <x-form.input type="text" name="name" label="name" placeholder="John Doe"
