@@ -28,7 +28,7 @@
                                             <td class="text-center">
                                                 <a href="{{ route('user.show', $user->id) }}" class="btn btn-primary">View</a>
                                                 <a href="{{ route('user.profile.edit', $user->id) }}" class="btn btn-warning">Edit</a>
-                                                <a href="{{ route('user.show', $user->id) }}" class="btn btn-danger">Delete</a>
+                                                <a href="{{ route('dashboard.delete.user', $user->id) }}" class="btn btn-danger">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach

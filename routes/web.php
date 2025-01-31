@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsAuthenticated;
 use App\Http\Middleware\IsGuest;
 use Illuminate\Support\Facades\Route;
@@ -40,7 +41,8 @@ Route::prefix('user')->group(function() {
 
 });
 
-Route::prefix('dashboard')->group(function() {
+Route::prefix('dashboard')->middleware(IsAdmin::class)->group(function() {
     Route::get('/',[DashboardController::class,'index'])->name('dashboard.index');
+    Route::delete('/delete/{id}',[DashboardController::class,'delete'])->name('dashboard.delete.user');
 });
 

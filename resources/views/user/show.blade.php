@@ -22,7 +22,7 @@
                             </div>
 
                             <!-- Edit, Logout & Update Buttons -->
-                            @if (Auth::check() && Auth::user()->id === $user->id)
+                            @if (Auth::check() && (Auth::user()->id === $user->id ||Auth::user()->role === 'admin'))
                                 <div class="mt-3 d-flex justify-content-center gap-2">
                                     <a href="{{ route('user.profile.edit', $user->id) }}" class="btn btn-primary">Edit
                                         Profile</a>

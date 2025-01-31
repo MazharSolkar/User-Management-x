@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -12,15 +13,15 @@ class DashboardController extends Controller
         return view('dashboard.index',compact('users'));
     }
 
-    public function edit() {
-        return 'edit page';
-    }
-
-    public function update() {
-        return 'update page';
-    }
-
     public function delete(string $id) {
-        return 'delete page';
+        $user = User::findOrFail($id);
+
+        if(Auth::user()->id === $user->id) {
+            $user->delete();
+            return redirect()->route('user.index')->with('success','Admin account deleted successfully!');
+        }
+
+        $user->delete();
+        return redirect()->route('dashboard.index')->with('success','User deleted successfully!');
     }
 }
