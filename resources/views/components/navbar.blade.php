@@ -7,10 +7,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="">Login</a>
-                <a class="nav-link" href="">Register</a>
-                <a class="nav-link" href="">Dashboard</a>
-                <a class="nav-link" href="">logout</a>
+                @if(Auth::check() && Auth::user()->role === 'admin')
+                <div class="mb-2">
+                    <button type="button" onclick="window.location.href='{{route('admin.dashboard')}}'" class="btn btn-primary">Dashboard</button>
+                </div>
+                @endif
+                @if(Auth::check())
+                <form action="{{route('user.logout')}}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+                @else
+                <div>
+                    <button type="button" onclick="window.location.href='{{route('user.login')}}'" class="btn btn-success">Login</button>
+                </div>
+                @endif
             </div>
         </div>
     </div>

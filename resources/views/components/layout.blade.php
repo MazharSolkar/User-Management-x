@@ -12,7 +12,6 @@
 <body>
     <x-navbar />
     <x-message />
-    <h1 class="fw-bold text-center my-4">{{$title}}</h1>
 
     <div>{{$main}}</div>
 </body>
