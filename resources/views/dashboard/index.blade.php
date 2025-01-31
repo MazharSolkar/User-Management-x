@@ -4,6 +4,7 @@
         <div class="container mt-5" style="max-width: 900px">
             <div class="row justify-content-center">
                 <div class="col-md-8">
+                    <a href="{{route('dashboard.create')}}" class="btn btn-success my-2">Add user+</a>
                     <div class="text-center">
                         <h3>User List</h3>
                     </div>
