@@ -24,7 +24,7 @@ class DashboardController extends Controller
     public function delete(string $id)
     {
         $user = User::findOrFail($id);
-        Gate::authorize('isOwnerOrAdmin', $user);
+        Gate::authorize('isOwnerOrAdmin', Auth::user());
 
         if (Auth::user()->id === $user->id) {
             $user->delete();

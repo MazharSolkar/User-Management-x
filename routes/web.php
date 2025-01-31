@@ -44,5 +44,7 @@ Route::prefix('user')->group(function() {
 Route::prefix('dashboard')->middleware(IsAdmin::class)->group(function() {
     Route::get('/',[DashboardController::class,'index'])->name('dashboard.index');
     Route::delete('/delete/{id}',[DashboardController::class,'delete'])->name('dashboard.delete.user');
+    Route::get('/create',[DashboardController::class,'create'])->name('dashboard.create');
+    Route::post('/store',[DashboardController::class,'store'])->name('dashboard.store');
 });
 

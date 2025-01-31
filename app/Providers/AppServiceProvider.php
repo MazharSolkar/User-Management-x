@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFive();
         Gate::define('isOwnerOrAdmin', function($user, $model) {
-            return $user->id == $model->id || $model->role == 'admin';
+            return $user->role == 'admin' || $user->id == $model->id;
         });
     }
 }
