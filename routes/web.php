@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsAuthenticated;
 use App\Http\Middleware\IsGuest;
@@ -20,6 +21,11 @@ Route::prefix('user')->group(function() {
         Route::get('login',[UserController::class,'login'])->name('user.login');
         Route::post('process-register',[UserController::class, 'processRegister'])->name('user.register.process');
         Route::post('process-login',[UserController::class, 'processLogin'])->name('user.login.process');
+
+        Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
+        Route::post('/forgot-password', [ResetPasswordController::class, 'passwordEmail'])->name('password.email');
+        Route::get('/reset-password/{token}', [ResetPasswordController::class, 'passwordReset'])->name('password.reset');
+        Route::post('/reset-password',[ResetPasswordController::class, 'passwordUpdate'])->name('password.update');
     });
 
     // Authenticated Routes

@@ -21,6 +21,7 @@
 
                             <div class="text-center">
                                 <p>Don't have an account? <a href="{{ route('user.register') }}">Register</a></p>
+                                <p><a href="{{route('password.request')}}">Forgot password</a></p>
                             </div>
                         </div>
                     </div>
