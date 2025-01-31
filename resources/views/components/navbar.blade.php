@@ -1,6 +1,10 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary" style="max-width: 992px; display: block; margin: auto;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ route('user.index') }}">Home</a>
+        @if (!Auth::check())
+            <a class="navbar-brand" href="{{ route('user.index') }}">Home</a>
+        @else
+            <a class="navbar-brand" href="{{ route('user.show',Auth::user()->id) }}">{{Auth::user()->name}}</a>
+        @endif
 
         <div class="d-flex align-items-center">
             @if (Auth::check() && Auth::user()->role === 'admin')
