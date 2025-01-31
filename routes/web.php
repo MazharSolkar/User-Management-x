@@ -1,14 +1,13 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsAuthenticated;
 use App\Http\Middleware\IsGuest;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('test');
-});
+Route::redirect('/', 'user/');
 
 Route::prefix('user')->group(function() {
     // Public Routes
@@ -41,6 +40,7 @@ Route::prefix('user')->group(function() {
 
 });
 
-Route::get('admin',function() {
-    return 'dashboard page';
-})->name('admin.dashboard');
+Route::prefix('dashboard')->group(function() {
+    Route::get('/',[DashboardController::class,'index'])->name('dashboard.index');
+});
+
