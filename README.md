@@ -36,9 +36,10 @@ Ensure you have the following installed on your machine:
    php artisan migrate
    php artisan db:seed
    ```
-6. Serve the application:
+6. Serve the application: `Keep both the commands running`
    ```bash
    php artisan serve
+   npm run dev
    ```
 
 ## Features
